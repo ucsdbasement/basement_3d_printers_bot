@@ -21,9 +21,6 @@ SIGNING_SECRET = os.environ.get('SIGNING_SECRET')
 # Flask application
 app = Flask(__name__)
 
-# End route for slack event subscriptions
-slack_event_adapter = SlackEventAdapter(SIGNING_SECRET, '/slack/events', app)
-
 client = slack.WebClient(token=SLACK_BOT_TOKEN)
 
 def send_camera_feed(channel_id, prusa_id):
