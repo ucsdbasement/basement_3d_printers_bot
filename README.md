@@ -121,7 +121,9 @@ find the Signing Secret credentials and add it to the `.env` file. The `.env` fi
 6. On the Slack app page, we need to create and enable slash commands. In the Slash Commands section, create four commands as shown.
     ![commands](images/commands.png)
 
-   For each of these commands their Request URL is the ngrok forwarding URL appended with the slash command. For example, my forwarding URL is https://ca7a-2603-8000-e642-2b00-81f-77e9-712e-cb32.ngrok-free.app. The Request URL for command `/prusa1-camera` is https://ca7a-2603-8000-e642-2b00-81f-77e9-712e-cb32.ngrok-free.app/prusa1-camera
+   For each of these commands their Request URL is the ngrok forwarding URL appended with the slash command. For example, my forwarding URL is https://ca7a-2603-8000-e642-2b00-81f-77e9-712e-cb32.ngrok-free.app. 
+   
+   Then the Request URL for command `/prusa1-camera` is https://ca7a-2603-8000-e642-2b00-81f-77e9-712e-cb32.ngrok-free.app/prusa1-camera
 
 7. Head to the Installed App Settings section and click the Reinstall to Workspace option.
 
@@ -135,6 +137,7 @@ Remember, everytime you quit/run an ngrok tunnel again, the forwarding URL chang
 <!-- File Architecture -->
 ## File Architecture
 
+```
 [basement_3d_printers_bot]
 ├─ 📁frames
     ├─ 📁prusa_1
@@ -153,6 +156,7 @@ Remember, everytime you quit/run an ngrok tunnel again, the forwarding URL chang
 ├─ 📄frame.py
 ├─ 📄main.py
 ├─ 📄requirements.txt
+```
 
 <!-- CONTACT -->
 ## Contact
