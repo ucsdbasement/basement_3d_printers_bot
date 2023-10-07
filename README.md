@@ -69,7 +69,7 @@ To get a local copy up and running follow these steps.
 This project will be running on a Raspberry Pi. Set up your Raspberry Pi by installing the Raspberry Pi OS. If you are comfortable with using Linux, I
 recommend downloading the Raspberry Pi OS Lite version. Here is a complete guide for installing the OS https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up.
 
-Make sure you have the latest version of Python 3.11.* on your Raspberry Pi. This project uses the Slack API, ensure that you also have permission to The Basement Slack or you own testing workspace. You're free to use any IDE for development, but [Visual Studio Code](https://code.visualstudio.com/) has many built-in functions to ease your workload. Highly recommend developing on this platform.
+Make sure you have the latest version of Python 3.11.* on your Raspberry Pi. This project uses the Slack API, ensure that you also have permission to The Basement workspace or to your own testing workspace. You are free to use any IDE for development, but [Visual Studio Code](https://code.visualstudio.com/) has many built-in functions to ease your workload. Highly recommend developing on this platform.
 
 ### Project Installation
 
@@ -100,7 +100,7 @@ Make sure you have the latest version of Python 3.11.* on your Raspberry Pi. Thi
 1. Create a [new Slack app](https://api.slack.com/apps) and add it to your desired workspace.
 
 2. In the OAuth & Permissions section, copy your Bot User OAuth Token and add it to an `.env` file. Likewise, in the Basic Information section,
-find Signing Secret credentials and add it to an `.env` file. The `.env` file should be located in the root directory of your repo with the following fields as shown.
+find the Signing Secret credentials and add it to the `.env` file. The `.env` file should be located in the root directory of your repo with the following fields as shown.
 
     ```
     SLACK_BOT_TOKEN=<your bot token>
@@ -128,12 +128,35 @@ find Signing Secret credentials and add it to an `.env` file. The `.env` file sh
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Run the `main.py` script and enter the availabe commands in any channel or conversation. The bot should respond to you with `.gif` camera feed of your selected Prusa 3D-printer in a direct message.
+Run the `main.py` script and enter the availabe commands in any channel or conversation. The bot should respond to you with a `.gif` camera feed of your selected Prusa 3D-printer in a direct message.
 
 Remember, everytime you quit/run an ngrok tunnel again, the forwarding URL changes. This means you would need to change the Request URL for all the commands on the Slack app page.
 
 <!-- File Architecture -->
 ## File Architecture
 
+[basement_3d_printers_bot]
+├─ 📁frames
+    ├─ 📁prusa_1
+        ├─ 📄...
+    ├─ 📁prusa_2
+        ├─ 📄...
+    ├─ 📁prusa_3
+        ├─ 📄...
+├─ 📁images
+    ├─ 📄commands.png
+    ├─ 📄ngrok.png
+    ├─ 📄scopes.png
+├─ 📄.env
+├─ 📄.gitignore
+├─ 📄README.md
+├─ 📄frame.py
+├─ 📄main.py
+├─ 📄requirements.txt
+
 <!-- CONTACT -->
 ## Contact
+
+For any questions and issues, contact the current Basement student technician. 
+
+This project was originally developed by [Kendrick Nguyen](https://github.com/kendrick010)
