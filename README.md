@@ -83,7 +83,6 @@ Make sure you have the latest version of Python 3.11.* on your Raspberry Pi. Thi
 3. Install the following Python dependencies:
     - slackclient
     - flask
-    - slackeventsapi
     - python-dotenv
     - opencv-python
     - Pillow
@@ -92,8 +91,6 @@ Make sure you have the latest version of Python 3.11.* on your Raspberry Pi. Thi
    ```sh
    pip install -r requirements.txt
    ```
-
-4. Run the `main.py` script and check what port the Flask server is currently using. Remember this port.
 
 ### Slack Bot Installation
 
@@ -112,7 +109,7 @@ find the Signing Secret credentials and add it to the `.env` file. The `.env` fi
 
 4. On your terminal, we need to start a ngrok tunnel to forward Slack requests on the internet to our local web server. Run,
     ```
-    ngrok http <your Flask port>
+    ngrok http 3000
     ```
 
 5. Once you have started an ngrok tunnel, copy the forwarding URL. Note, everytime you quit/run an ngrok tunnel again, the forwarding URL changes.

@@ -1,6 +1,5 @@
 slackclient
 flask
-slackeventsapi
 python-dotenv
 opencv-python
 Pillow
