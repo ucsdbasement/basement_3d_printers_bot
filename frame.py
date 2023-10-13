@@ -6,11 +6,6 @@ import cv2
 import time
 
 def stich_frames(prusa_id):
-    '''
-    Stich frames as a .gif taken from webcam
-    '''
-
-    # filepaths
     frames = f'frames/prusa_{prusa_id}/*.png'
     file_out = f'frames/prusa_{prusa_id}/feed.gif'
 
@@ -27,13 +22,6 @@ def stich_frames(prusa_id):
 
 
 def get_frames(prusa_id, num_frames=30):
-    '''
-    Get frames from webcam and store it locally
-    '''
-
-    assert isinstance(prusa_id, int)
-    assert prusa_id in [1, 2, 3]
-
     capture = cv2.VideoCapture(0)
     
     for i in range(num_frames):

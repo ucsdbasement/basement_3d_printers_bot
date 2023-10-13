@@ -1,5 +1,6 @@
 # Slack api and event listener
 import slack
+from slack_blocks import help_command, camera_command, failed_command, cat_command
 
 # Env variables
 import os
@@ -29,11 +30,10 @@ client = slack.WebClient(token=SLACK_BOT_TOKEN)
 def send_camera_feed(user_id, channel_id, prusa_id):
     try:
         #get_frames(prusa_id=prusa_id, num_frames=30)
-        client.files_upload(channels=channel_id, initial_comment=f':warning: Prusa 3D-Printer {prusa_id} Camera Feed', file=f'frames/prusa_{prusa_id}/image.gif')
+        client.files_upload(channels=channel_id, initial_comment=camera_command(prusa_id), file=f'frames/prusa_{prusa_id}/image.gif')
 
     except:
-        text = ':warning: Camera request failed. Please try again or contact The Basement technician for help.\n:exclamation: These are the available Basement 3D-Printers commands:\n> `/prusa-camera-help` Command guide\n> `/prusa1-camera` Display camera feed for Prusa 3D-Printer 1\n> `/prusa2-camera` Display camera feed for Prusa 3D-Printer 2\n> `/prusa3-camera` Display camera feed for Prusa 3D-Printer 3'
-        client.chat_postMessage(channel=channel_id, text=text, mrkdwn=True)
+        client.chat_postMessage(channel=channel_id, attachments=failed_command)
 
     with open('log.csv', 'a') as f:
         writer_object = writer(f)
@@ -48,8 +48,8 @@ def printer_help():
     response = client.conversations_open(users=user_id)
     channel_id = response['channel']['id']
 
-    text = ':wave: Hi there, I am a bot for the 3D-Printers at The Basement. I can help you monitor your prints while you are away.\n:exclamation: These are the available Basement 3D-Printers commands:\n> `/prusa-camera-help` Command guide\n> `/prusa1-camera` Display camera feed for Prusa 3D-Printer 1\n> `/prusa2-camera` Display camera feed for Prusa 3D-Printer 2\n> `/prusa3-camera` Display camera feed for Prusa 3D-Printer 3'
-    response = client.chat_postMessage(channel=channel_id, text=text, mrkdwn=True)
+    blocks = help_command
+    response = client.chat_postMessage(channel=channel_id, attachments=blocks)
 
     with open('log.csv', 'a') as f:
         writer_object = writer(f)
@@ -62,14 +62,25 @@ def prusa1_camera_feed(prusa_id):
     data = request.form
     user_id = data.get('user_id')
 
-    print(data)
-
     # Open a direct message with user
     response = client.conversations_open(users=user_id)
     channel_id = response['channel']['id']
 
     thread_prusa1 = Thread(target=send_camera_feed, args=[user_id, channel_id, prusa_id])
     thread_prusa1.start()
+
+    return Response(), 200
+
+@app.route('/random-cat', methods=['POST'])
+def random_cat():
+    data = request.form
+    user_id = data.get('user_id')
+
+    # Open a direct message with user
+    response = client.conversations_open(users=user_id)
+    channel_id = response['channel']['id']
+
+    response = client.chat_postMessage(channel=channel_id, attachments=cat_command())
 
     return Response(), 200
 
