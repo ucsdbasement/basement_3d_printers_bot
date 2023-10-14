@@ -57,6 +57,7 @@ discover potential print failures. Of course, this bot solution is scalable for 
 * [Slack API](https://api.slack.com/)
 * [OpenCV](https://opencv.org/)
 * [Flask](https://flask.palletsprojects.com/en/3.0.x/)
+* [MySQL](https://www.mysql.com/)
 
 
 <!-- GETTING STARTED -->
@@ -79,6 +80,8 @@ Make sure you have the latest version of Python 3.11.* on your Raspberry Pi. Thi
    ```
 
 2. Download [ngrok](https://ngrok.com/download)
+
+3. For Raspberry Pi users, install MySQL using `sudo apt install mariadb-server` and `sudo mysql_secure_installation`. For local machines install [here](https://dev.mysql.com/downloads/mysql/).
 
 3. Install the following Python dependencies:
     - slackclient
@@ -153,6 +156,7 @@ Remember, everytime you quit/run an ngrok tunnel again, the forwarding URL chang
 ├─ 📄frame.py
 ├─ 📄main.py
 ├─ 📄requirements.txt
+├─ 📄slack_blocks.py
 ```
 
 <!-- CONTACT -->

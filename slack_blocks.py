@@ -7,18 +7,18 @@ help_command = [
         "color": "#d1d2d3",
         "author_name": "The Basement 3D-Printers Bot",
         "author_icon": "http://placekitten.com/g/16/16",
-        "title": "Hi there, I am a bot for the 3D-Printers at The Basement. I can help monitor your prints while you are away.",
+        "title": "Hi there :wave:, I am a bot for the 3D-Printers at The Basement. I can help monitor your prints while you are away.",
     },
     {
         "mrkdwn_in": ["text"],
         "color": "#ff4500",
-        "title": ":exclamation:Reach out to me with these available commands. Please give me a few seconds for camera related commands.",
+        "title": ":exclamation:Reach out to me with these available commands. Please give me a few seconds for camera related commands. Previous requested camera footages will automatically be deleted to optimize storage space.:exclamation:",
         "fields": 
         [
             {"value": "-`/prusa-camera-help`: Command guide"},
-            {"value": "-`/prusa1-camera`: Display camera feed for Prusa 3D-Printer 1"},
-            {"value": "-`/prusa2-camera`: Display camera feed for Prusa 3D-Printer 2"},
-            {"value": "-`/prusa3-camera`: Display camera feed for Prusa 3D-Printer 3"},
+            {"value": "-`/prusa1-camera`: Display camera footage for Prusa 3D-Printer 1"},
+            {"value": "-`/prusa2-camera`: Display camera footage for Prusa 3D-Printer 2"},
+            {"value": "-`/prusa3-camera`: Display camera footage for Prusa 3D-Printer 3"},
             {"value": "-`/random-cat`: Receive a random cat picture"},
         ],
         "footer": "Report to @Kendrick Nguyen for any bugs/issues."
@@ -37,7 +37,7 @@ failed_command = [
 
 def camera_command(prusa_id):
     command = f'/prusa{prusa_id}-camera'
-    return f'> :warning: Prusa 3D-Printer {prusa_id} Camera Feed via `{command}` command. :warning:'
+    return f'> :warning: Prusa 3D-Printer {prusa_id} Camera Footage via `{command}` command. Previous requested camera footages will automatically be deleted to optimize storage space.:warning:'
 
 def cat_command():
     request_url = 'https://cataas.com/c?json=true&width=200&height=200'

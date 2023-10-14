@@ -1,6 +1,6 @@
-# Slack api and event listener
+# Slack api
 import slack
-from slack_blocks import help_command, camera_command, failed_command, cat_command
+import slack_blocks
 
 # Env variables
 import os
@@ -10,11 +10,10 @@ from dotenv import load_dotenv
 from threading import Thread
 from frame import get_frames
 
-# Import writer class from csv module
-from csv import writer
+# Database
+import db
 
 from flask import Flask, request, Response
-from datetime import datetime
 
 # Load env variables secrets
 load_dotenv()
@@ -29,15 +28,22 @@ client = slack.WebClient(token=SLACK_BOT_TOKEN)
 
 def send_camera_feed(user_id, channel_id, prusa_id):
     try:
+        file_id = db.delete_file_cache(user_id)
+        if file_id:
+            client.files_delete(file=file_id)
+
         #get_frames(prusa_id=prusa_id, num_frames=30)
-        client.files_upload(channels=channel_id, initial_comment=camera_command(prusa_id), file=f'frames/prusa_{prusa_id}/image.gif')
+
+        file_path = f'frames/prusa_{prusa_id}/image.gif'
+        response = client.files_upload(channels=channel_id, initial_comment=slack_blocks.camera_command(prusa_id), file=file_path)
+        file_id = response['file']['id']
+
+        db.add_file_cache(user_id, file_id)
 
     except:
-        client.chat_postMessage(channel=channel_id, attachments=failed_command)
+        client.chat_postMessage(channel=channel_id, attachments=slack_blocks.failed_command)
 
-    with open('log.csv', 'a') as f:
-        writer_object = writer(f)
-        writer_object.writerow([user_id, f'prusa_{prusa_id}', datetime.now()])
+    db.record_activity(user_id, f'prusa_{prusa_id}')
 
 @app.route('/prusa-camera-help', methods=['POST'])
 def printer_help():
@@ -48,12 +54,10 @@ def printer_help():
     response = client.conversations_open(users=user_id)
     channel_id = response['channel']['id']
 
-    blocks = help_command
+    blocks = slack_blocks.help_command
     response = client.chat_postMessage(channel=channel_id, attachments=blocks)
 
-    with open('log.csv', 'a') as f:
-        writer_object = writer(f)
-        writer_object.writerow([user_id, 'help', datetime.now()])
+    db.record_activity(user_id, 'help')
 
     return Response(), 200
 
@@ -80,7 +84,7 @@ def random_cat():
     response = client.conversations_open(users=user_id)
     channel_id = response['channel']['id']
 
-    response = client.chat_postMessage(channel=channel_id, attachments=cat_command())
+    response = client.chat_postMessage(channel=channel_id, attachments=slack_blocks.cat_command())
 
     return Response(), 200
 
