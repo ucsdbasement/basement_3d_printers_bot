@@ -89,6 +89,7 @@ Make sure you have the latest version of Python 3.11.* on your Raspberry Pi. Thi
     - python-dotenv
     - opencv-python
     - Pillow
+    - mysql-connector-python
 
    or alternatively run,
    ```sh
@@ -121,7 +122,7 @@ find the Signing Secret credentials and add it to the `.env` file. The `.env` fi
 6. On the Slack app page, we need to create and enable slash commands. In the Slash Commands section, create four commands as shown.
     ![commands](images/commands.png)
 
-   For each of these commands their Request URL is the ngrok forwarding URL appended with the slash command. For example, my forwarding URL is https://ca7a-2603-8000-e642-2b00-81f-77e9-712e-cb32.ngrok-free.app. 
+   For each of these commands their Request URL is the ngrok forwarding URL appended with the slash command. For example, if your forwarding URL is https://ca7a-2603-8000-e642-2b00-81f-77e9-712e-cb32.ngrok-free.app. 
    
    Then the Request URL for command `/prusa1-camera` is https://ca7a-2603-8000-e642-2b00-81f-77e9-712e-cb32.ngrok-free.app/prusa1-camera
 
@@ -130,9 +131,10 @@ find the Signing Secret credentials and add it to the `.env` file. The `.env` fi
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Run the `main.py` script and enter the availabe commands in any channel or conversation. The bot should respond to you with a `.gif` camera feed of your selected Prusa 3D-printer in a direct message.
+Run the `main.py` script and enter the availabe commands in any channel or conversation. The bot should respond to you with a `.gif` camera footage of your selected Prusa 3D-printer in a direct message.
 
-Remember, everytime you quit/run an ngrok tunnel again, the forwarding URL changes. This means you would need to change the Request URL for all the commands on the Slack app page.
+> **Warning**
+> Remember, everytime you quit/run an ngrok tunnel again, the forwarding URL changes. This means you would need to change the Request URL for all the commands on the Slack app page.
 
 <!-- File Architecture -->
 ## File Architecture
@@ -153,6 +155,7 @@ Remember, everytime you quit/run an ngrok tunnel again, the forwarding URL chang
 ├─ 📄.env
 ├─ 📄.gitignore
 ├─ 📄README.md
+├─ 📄db.py
 ├─ 📄frame.py
 ├─ 📄main.py
 ├─ 📄requirements.txt
