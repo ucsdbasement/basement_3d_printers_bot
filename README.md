@@ -36,7 +36,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#file-architecture">File Architecture</a></li>
+    <li><a href="#application-and-file-architecture">Application and File Architecture</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -79,7 +79,7 @@ Make sure you have the latest version of Python 3.11.* on your Raspberry Pi. Thi
    git clone https://github.com/ucsdbasement/basement_3d_printers_bot.git
    ```
 
-2. Download [ngrok](https://ngrok.com/download)
+2. Download and setup [ngrok](https://ngrok.com/download). Feel free to use the free trial.
 
 3. For Raspberry Pi users, install MySQL using `sudo apt install mariadb-server` and `sudo mysql_secure_installation`. For local machines install [here](https://dev.mysql.com/downloads/mysql/).
 
@@ -137,7 +137,9 @@ Run the `main.py` script and enter the availabe commands in any channel or conve
 > Remember, everytime you quit/run an ngrok tunnel again, the forwarding URL changes. This means you would need to change the Request URL for all the commands on the Slack app page.
 
 <!-- File Architecture -->
-## File Architecture
+## Application and File Architecture
+
+![architecture](images/architecture.png)
 
 ```
 [basement_3d_printers_bot]
